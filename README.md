@@ -21,27 +21,7 @@
 
 #### 使用
 
-1. 工程目录
-
-    > ├─lib
-    > │      simpleframe.jar
-    > ├─src
-    > │  └─com
-    > │      └─test
-    > │          ├─config
-    > │          │      ApplicationConfig.java
-    > │          │
-    > │          ├─controller
-    > │          │      HelloController.java
-    > │          │
-    > │          └─model
-    > │                  Result.java
-    > │
-    > └─web
-    >          └─WEB-INF
-    >                        web.xml
-
-2.   Result.java
+1.   Result.java
 
     ```java
     package com.test.model;
