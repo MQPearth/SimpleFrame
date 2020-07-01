@@ -4,7 +4,9 @@ package simpleframe.annotation.mvc;
 import java.lang.annotation.*;
 
 /**
- * 处理一个get请求
+ * 匹配一个post请求
+ *
+ * @author MQPearth
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -12,7 +14,6 @@ import java.lang.annotation.*;
 public @interface PostMapping {
     /**
      * 具体的映射路径
-     * @return
      */
     String value() default "";
 }

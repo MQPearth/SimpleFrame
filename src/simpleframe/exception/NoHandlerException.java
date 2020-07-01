@@ -2,7 +2,8 @@ package simpleframe.exception;
 
 /**
  * 找不到 处理器、资源 异常
- * @blame MQPearth
+ *
+ * @author MQPearth
  */
 public class NoHandlerException extends Exception {
 

@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 /**
  * HttpServletResponse代理对象
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public class HttpServletResponseInvocation extends AbstractHttpServletInvocation {
 
@@ -24,7 +24,9 @@ public class HttpServletResponseInvocation extends AbstractHttpServletInvocation
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 线程本地 变量
 
+
         HttpServletResponse response = AbstractHttpServletInvocation.getThreadLocal().get().getResponse();
+
 
         return method.invoke(response, args);
 

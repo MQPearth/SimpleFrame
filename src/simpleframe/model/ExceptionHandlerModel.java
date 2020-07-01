@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 
 /**
  * 异常处理 封装对象
- * @blame MQPearth
+ *
+ * @author MQPearth
  */
 public class ExceptionHandlerModel {
 

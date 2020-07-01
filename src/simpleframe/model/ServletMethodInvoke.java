@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 /**
  * 请求方法调用 封装对象
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public class ServletMethodInvoke {
     /**

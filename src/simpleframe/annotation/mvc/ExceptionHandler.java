@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 
 /**
  * 标识此方法处理一个异常
+ *
+ * @author MQPearth
  */
-
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExceptionHandler {

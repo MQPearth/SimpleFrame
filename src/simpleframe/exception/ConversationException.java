@@ -3,7 +3,7 @@ package simpleframe.exception;
 /**
  * json转换异常
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public class ConversationException extends Exception {
     public ConversationException() {

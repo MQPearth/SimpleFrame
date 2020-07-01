@@ -7,7 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 处理一个get请求
+ * 匹配一个put请求
+ *
+ * @author MQPearth
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,8 +17,6 @@ import java.lang.annotation.Target;
 public @interface PutMapping {
     /**
      * 具体的映射路径
-     *
-     * @return
      */
     String value() default "";
 }

@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 
 /**
  * 用于表明此方法的返回值交给框架的容器管理
+ *
+ * @author MQPearth
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

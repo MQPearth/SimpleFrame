@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * json转换工具
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public class JsonUtils {
 
@@ -86,7 +86,7 @@ public class JsonUtils {
     public static String toJSON(Object obj) throws ConversationException {
         try {
             HashSet<Object> serializationObjectSet = new HashSet<>();
-            return toJSON(obj, serializationObjectSet);
+            return toJson(obj, serializationObjectSet);
 
         } catch (Exception e) {
             throw new ConversationException("json转换异常");
@@ -99,7 +99,7 @@ public class JsonUtils {
      * @param serializationObjectSet 已出现过的对象
      * @return json
      */
-    private static String toJSON(Object obj, HashSet<Object> serializationObjectSet) throws ConversationException {
+    private static String toJson(Object obj, HashSet<Object> serializationObjectSet) throws ConversationException {
         // 当前对象已出现过
         if (serializationObjectSet.contains(obj)) {
             return QUOTATION_MARKS + NULL_OBJECT + QUOTATION_MARKS;
@@ -113,7 +113,7 @@ public class JsonUtils {
         Class clazz = obj.getClass();
         Field[] fields = clazz.getDeclaredFields();
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(JSON_START);
         for (Field field : fields) {
 
@@ -136,7 +136,7 @@ public class JsonUtils {
                         // 是一个不在 [ classSet ] 内的对象
                         serializationObjectSet.add(obj);
 
-                        fieldValue = toJSON(valueReturn, serializationObjectSet);
+                        fieldValue = toJson(valueReturn, serializationObjectSet);
                         isObject = true;
                     }
                 } else {
@@ -172,7 +172,7 @@ public class JsonUtils {
     /**
      * 字符串的首字母转大写
      *
-     * @param str
+     * @param str 字符串
      * @return
      */
     private static String firstLetterToUpperCase(String str) {

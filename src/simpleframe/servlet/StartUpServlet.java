@@ -4,8 +4,7 @@ import simpleframe.annotation.bean.Autowired;
 import simpleframe.annotation.bean.Bean;
 import simpleframe.annotation.bean.Component;
 import simpleframe.annotation.mvc.*;
-import simpleframe.data.GetRequestData;
-import simpleframe.data.HandlerRequestData;
+
 import simpleframe.exception.ConversationException;
 import simpleframe.exception.NoHandlerException;
 import simpleframe.model.ExceptionHandlerModel;
@@ -20,10 +19,8 @@ import simpleframe.util.JsonUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
@@ -33,7 +30,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * 用于扫描类 配置类 分发请求 异常处理
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public class StartUpServlet implements Servlet {
 
@@ -54,11 +51,6 @@ public class StartUpServlet implements Servlet {
      */
     private static final HashMap<Class, ExceptionHandlerModel> EXCEPTION_HANDLER_MAP = new HashMap<>(20);
 
-    /**
-     * 处理请求携带数据
-     */
-    private static final HashMap<String, HandlerRequestData> HANDLER_REQUEST_DATA_MAP = new HashMap<>(5);
-
 
     static {
 
@@ -66,23 +58,17 @@ public class StartUpServlet implements Servlet {
         Class requestClass = HttpServletRequestWrapper.class;
         Class responseClass = HttpServletResponseWrapper.class;
 
-
+        // jdk 动态代理
         HttpServletRequestInvocation requestInvocation = new HttpServletRequestInvocation();
         HttpServletRequest requestInstance = (HttpServletRequest)Proxy.newProxyInstance(requestClass.getClassLoader(), requestClass.getInterfaces(), requestInvocation);
 
-        // jdk 动态代理
         HttpServletResponseInvocation responseInvocation = new HttpServletResponseInvocation();
         HttpServletResponse responseInstance = (HttpServletResponse)Proxy.newProxyInstance(responseClass.getClassLoader(), responseClass.getInterfaces(), responseInvocation);
 
+        // 放入容器
         BEAN_MAP.put(HttpServletRequest.class.getName(), requestInstance);
         BEAN_MAP.put(HttpServletResponse.class.getName(), responseInstance);
 
-
-        HANDLER_REQUEST_DATA_MAP.put("GET", new GetRequestData());
-        HANDLER_REQUEST_DATA_MAP.put("POST", new GetRequestData());
-        HANDLER_REQUEST_DATA_MAP.put("DELETE", new GetRequestData());
-        HANDLER_REQUEST_DATA_MAP.put("PUT", new GetRequestData());
-        HANDLER_REQUEST_DATA_MAP.put("PATCH", new GetRequestData());
 
     }
 
@@ -383,44 +369,12 @@ public class StartUpServlet implements Servlet {
         Object instance = servletMethod.getInstance();
 
 
-        // next version
-//        Map<String, Object> parameter = getData(method, request);
-//
-//        parameter.forEach((key, values) -> {
-//
-//            System.out.println(key + "--" + values);
-//        });
-//        method = settingMethodParameter(parameter);
-
         Object valueReturn = method.invoke(instance, args);
         if (null != valueReturn) {
             writerResponse(response, valueReturn);
         }
 
 
-    }
-
-    /**
-     * 自动注入方法上的参数
-     *
-     * @param parameter 参数map
-     * @return
-     */
-    private Method settingMethodParameter(Map<String, Object> parameter) {
-
-
-        return null;
-    }
-
-    /**
-     * 提取请求携带的数据
-     *
-     * @param request
-     * @return
-     */
-    private Map<String, Object> getData(Method method, HttpServletRequest request) {
-
-        return HANDLER_REQUEST_DATA_MAP.get(request.getMethod()).handlerData(method, request);
     }
 
     /**

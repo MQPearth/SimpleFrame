@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * servlet 封装对象 用于threadLocal
- * @blame MQPearth
+ *
+ * @author MQPearth
  */
 public class ServletModel {
 

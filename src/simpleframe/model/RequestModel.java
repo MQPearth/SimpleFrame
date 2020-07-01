@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 
 /**
  * 请求处理 封装模型
- * @blame MQPearth
+ *
+ * @author MQPearth
  */
 public class RequestModel {
 

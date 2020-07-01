@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationHandler;
 /**
  * 实现invocationHandler 子类需实现invoke方法进行代理
  *
- * @blame MQPearth
+ * @author MQPearth
  */
 public abstract class AbstractHttpServletInvocation implements InvocationHandler {
 
